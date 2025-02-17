@@ -6,7 +6,7 @@ RUN apt update && apt install -y tzdata
 RUN ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 
-# Dependencies
+# Зависимости
 RUN apt update && apt install -y \
     build-essential \
     cmake \
@@ -22,12 +22,11 @@ RUN apt update && apt install -y \
     libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Ccache setup
+# Ccache
 ENV CCACHE_DIR=/ccache
 RUN mkdir -p $CCACHE_DIR && chmod 777 $CCACHE_DIR
 ENV PATH="/usr/lib/ccache:${PATH}"
 
-# Workdir making
 WORKDIR /build
 
 CMD ["/bin/bash"]
